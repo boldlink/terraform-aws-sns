@@ -82,31 +82,12 @@ data "aws_iam_policy_document" "sns_topic_policy" {
 sns topic subscription
 */
 
-resource "aws_iam_role" "firehose_role" {
-  name               = "firehose_test_role"
-  assume_role_policy = <<EOF
-{
-  "Version": "2012-10-17",
-  "Statement": [
-    {
-      "Action": "sts:AssumeRole",
-      "Principal": {
-        "Service": "firehose.amazonaws.com"
-      },
-      "Effect": "Allow",
-      "Sid": ""
-    }
-  ]
-}
-EOF
-}
-
 resource "aws_sns_topic_subscription" "main" {
   count                           = var.subscription_endpoint != null ? 1 : 0
   topic_arn                       = aws_sns_topic.main.arn
   endpoint                        = var.subscription_endpoint
   protocol                        = var.protocol
-  subscription_role_arn           = var.protocol == "firehose" ? aws_iam_role.firehose_role.arn : var.subscription_role_arn
+  subscription_role_arn           = var.subscription_role_arn
   confirmation_timeout_in_minutes = var.confirmation_timeout_in_minutes
   delivery_policy                 = var.subscription_delivery_policy
   endpoint_auto_confirms          = var.endpoint_auto_confirms
