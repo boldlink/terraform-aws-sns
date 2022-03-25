@@ -153,41 +153,29 @@ sns topic policy
 variable "sns_topic_policy" {
   type        = string
   description = "(Required) The fully-formed AWS policy as JSON."
-  default     = ""
-}
-
-variable "create_sns_topic_policy" {
-  type        = bool
-  description = "Choose whether to create this resource or not"
-  default     = false
+  default     = null
 }
 
 /*
 sns topic subscription
 */
 
-variable "endpoint" {
+variable "subscription_endpoint" {
   type        = string
   description = "(Required) Endpoint to send data to. The contents vary with the protocol."
-  default     = ""
+  default     = null
 }
 
 variable "protocol" {
   type        = string
   description = "(Required) Protocol to use. Valid values are: `sqs`, `sms`, `lambda`, `firehose`, and `application`. Protocols `email`, `email-json`, `http` and `https` are also valid but partially supported."
-  default     = ""
+  default     = "application"
 }
 
 variable "subscription_role_arn" {
   type        = string
   description = "(Required if protocol is `firehose`) ARN of the IAM role to publish to Kinesis Data Firehose delivery stream."
   default     = ""
-}
-
-variable "sns_topic_subscription" {
-  type        = bool
-  description = "Specify whether to create this resource or not"
-  default     = false
 }
 
 variable "confirmation_timeout_in_minutes" {
@@ -224,10 +212,4 @@ variable "redrive_policy" {
   type        = string
   description = "(Optional) JSON String with the redrive policy that will be used in the subscription."
   default     = null
-}
-
-variable "create_sns_topic_subscription" {
-  type        = bool
-  description = "Specify whether to create resource"
-  default     = false
 }

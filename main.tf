@@ -2,6 +2,8 @@
 sns topic
 */
 
+data "aws_caller_identity" "current" {}
+
 resource "aws_sns_topic" "main" {
   name                                     = var.name
   name_prefix                              = var.name != null ? null : var.name_prefix
@@ -33,22 +35,78 @@ resource "aws_sns_topic" "main" {
 sns topic policy
 */
 
-resource "aws_sns_topic_policy" "main" {
-  count  = var.create_sns_topic_policy ? 1 : 0
+resource "aws_sns_topic_policy" "default" {
   arn    = aws_sns_topic.main.arn
-  policy = var.sns_topic_policy
+  policy = var.sns_topic_policy != null ? var.sns_topic_policy : data.aws_iam_policy_document.sns_topic_policy.json
+}
+
+data "aws_iam_policy_document" "sns_topic_policy" {
+  policy_id = "__default_policy_ID"
+
+  statement {
+    actions = [
+      "SNS:Subscribe",
+      "SNS:SetTopicAttributes",
+      "SNS:RemovePermission",
+      "SNS:Receive",
+      "SNS:Publish",
+      "SNS:ListSubscriptionsByTopic",
+      "SNS:GetTopicAttributes",
+      "SNS:DeleteTopic",
+      "SNS:AddPermission",
+    ]
+
+    condition {
+      test     = "StringEquals"
+      variable = "AWS:SourceOwner"
+
+      values = [
+        data.aws_caller_identity.current.account_id,
+      ]
+    }
+
+    effect = "Allow"
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
+
+    resources = [
+      aws_sns_topic.main.arn,
+    ]
+    sid = "__default_statement_ID"
+  }
 }
 
 /*
 sns topic subscription
 */
 
+resource "aws_iam_role" "firehose_role" {
+  name               = "firehose_test_role"
+  assume_role_policy = <<EOF
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Action": "sts:AssumeRole",
+      "Principal": {
+        "Service": "firehose.amazonaws.com"
+      },
+      "Effect": "Allow",
+      "Sid": ""
+    }
+  ]
+}
+EOF
+}
+
 resource "aws_sns_topic_subscription" "main" {
-  count                           = var.create_sns_topic_subscription ? 1 : 0
+  count                           = var.subscription_endpoint != null ? 1 : 0
   topic_arn                       = aws_sns_topic.main.arn
-  endpoint                        = var.endpoint
+  endpoint                        = var.subscription_endpoint
   protocol                        = var.protocol
-  subscription_role_arn           = var.subscription_role_arn
+  subscription_role_arn           = var.protocol == "firehose" ? aws_iam_role.firehose_role.arn : var.subscription_role_arn
   confirmation_timeout_in_minutes = var.confirmation_timeout_in_minutes
   delivery_policy                 = var.subscription_delivery_policy
   endpoint_auto_confirms          = var.endpoint_auto_confirms
