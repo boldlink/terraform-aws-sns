@@ -1,6 +1,6 @@
-/*
-sns topic
-*/
+#########################
+## sns topic
+#########################
 
 output "id" {
   value       = aws_sns_topic.main.id
@@ -22,9 +22,9 @@ output "tags_all" {
   description = "A map of tags assigned to the resource, including those inherited from the provider [`default_tags` configuration block](https://registry.terraform.io/docs/providers/aws/index#default_tags-configuration-block)."
 }
 
-/*
-sns topic subscription
-*/
+#########################
+## sns topic subscription
+#########################
 
 output "subscription_arn" {
   value       = aws_sns_topic_subscription.main.*.arn

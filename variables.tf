@@ -1,6 +1,6 @@
-/*
-sns topic
-*/
+#########################
+## sns topic
+#########################
 
 variable "name" {
   type        = string
@@ -146,9 +146,9 @@ variable "tags" {
   default     = {}
 }
 
-/*
-sns topic policy
-*/
+#########################
+## sns topic policy
+#########################
 
 variable "sns_topic_policy" {
   type        = string
@@ -156,9 +156,9 @@ variable "sns_topic_policy" {
   default     = null
 }
 
-/*
-sns topic subscription
-*/
+#########################
+## sns topic subscription
+#########################
 
 variable "subscription_endpoint" {
   type        = string
