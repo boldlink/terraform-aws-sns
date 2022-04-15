@@ -5,7 +5,7 @@ locals {
 module "aws_sns_topic" {
   source                      = "./.."
   name                        = local.name
-  kms_master_key_id           = "alias/aws/sns"
+  create_kms_key              = true
   fifo_topic                  = true
   content_based_deduplication = true
   delivery_policy             = <<EOF

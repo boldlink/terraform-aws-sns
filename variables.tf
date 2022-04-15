@@ -152,7 +152,7 @@ variable "tags" {
 
 variable "sns_topic_policy" {
   type        = string
-  description = "(Required) The fully-formed AWS policy as JSON."
+  description = "The fully-formed AWS policy as JSON."
   default     = null
 }
 
@@ -212,4 +212,19 @@ variable "redrive_policy" {
   type        = string
   description = "(Optional) JSON String with the redrive policy that will be used in the subscription."
   default     = null
+}
+
+######################
+### Encryption
+######################
+variable "use_default_kms_key" {
+  type        = bool
+  description = "Choose whether to use default kms key for sns"
+  default     = false
+}
+
+variable "create_kms_key" {
+  type        = bool
+  description = "Choose whether to create kms key for sns"
+  default     = false
 }
