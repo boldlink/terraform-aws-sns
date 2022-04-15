@@ -40,19 +40,8 @@ resource "aws_sns_topic" "main" {
 }
 
 #########################
-## sns topic policy
-#########################
-
-resource "aws_sns_topic_policy" "main" {
-  count  = var.sns_topic_policy != null ? 1 : 0
-  arn    = aws_sns_topic.main.arn
-  policy = var.sns_topic_policy
-}
-
-#########################
 ## sns topic subscription
 #########################
-
 resource "aws_sns_topic_subscription" "main" {
   count                           = var.subscription_endpoint != null ? 1 : 0
   topic_arn                       = aws_sns_topic.main.arn

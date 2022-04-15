@@ -147,16 +147,6 @@ variable "tags" {
 }
 
 #########################
-## sns topic policy
-#########################
-
-variable "sns_topic_policy" {
-  type        = string
-  description = "The fully-formed AWS policy as JSON."
-  default     = null
-}
-
-#########################
 ## sns topic subscription
 #########################
 
