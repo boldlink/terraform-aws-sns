@@ -1,8 +1,16 @@
-/*
-sns topic
-*/
+##################
+## KMS Key
+##################
+resource "aws_kms_key" "sns" {
+  count                   = var.create_kms_key ? 1 : 0
+  description             = "KMS Key for SNStopics"
+  policy                  = element(concat(data.aws_iam_policy_document.main.*.json, [""]), 0)
+  deletion_window_in_days = var.key_deletion_window
+}
 
-data "aws_caller_identity" "current" {}
+##################
+## sns topic
+##################
 
 resource "aws_sns_topic" "main" {
   name                                     = var.name
@@ -16,7 +24,7 @@ resource "aws_sns_topic" "main" {
   http_success_feedback_role_arn           = var.http_success_feedback_role_arn
   http_success_feedback_sample_rate        = var.http_success_feedback_sample_rate
   http_failure_feedback_role_arn           = var.http_failure_feedback_role_arn
-  kms_master_key_id                        = var.kms_master_key_id
+  kms_master_key_id                        = var.create_kms_key == false && var.use_default_kms_key ? "alias/aws/sns" : (var.create_kms_key && var.use_default_kms_key == false ? aws_kms_key.sns[0].arn : var.kms_master_key_id)
   fifo_topic                               = var.fifo_topic
   content_based_deduplication              = var.content_based_deduplication
   lambda_success_feedback_role_arn         = var.lambda_success_feedback_role_arn
@@ -31,57 +39,9 @@ resource "aws_sns_topic" "main" {
   tags                                     = var.tags
 }
 
-/*
-sns topic policy
-*/
-
-resource "aws_sns_topic_policy" "default" {
-  arn    = aws_sns_topic.main.arn
-  policy = var.sns_topic_policy != null ? var.sns_topic_policy : data.aws_iam_policy_document.sns_topic_policy.json
-}
-
-data "aws_iam_policy_document" "sns_topic_policy" {
-  policy_id = "__default_policy_ID"
-
-  statement {
-    actions = [
-      "SNS:Subscribe",
-      "SNS:SetTopicAttributes",
-      "SNS:RemovePermission",
-      "SNS:Receive",
-      "SNS:Publish",
-      "SNS:ListSubscriptionsByTopic",
-      "SNS:GetTopicAttributes",
-      "SNS:DeleteTopic",
-      "SNS:AddPermission",
-    ]
-
-    condition {
-      test     = "StringEquals"
-      variable = "AWS:SourceOwner"
-
-      values = [
-        data.aws_caller_identity.current.account_id,
-      ]
-    }
-
-    effect = "Allow"
-    principals {
-      type        = "AWS"
-      identifiers = ["*"]
-    }
-
-    resources = [
-      aws_sns_topic.main.arn,
-    ]
-    sid = "__default_statement_ID"
-  }
-}
-
-/*
-sns topic subscription
-*/
-
+#########################
+## sns topic subscription
+#########################
 resource "aws_sns_topic_subscription" "main" {
   count                           = var.subscription_endpoint != null ? 1 : 0
   topic_arn                       = aws_sns_topic.main.arn

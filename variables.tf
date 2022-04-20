@@ -1,11 +1,17 @@
-/*
-sns topic
-*/
+#########################
+## sns topic
+#########################
 
 variable "name" {
   type        = string
   description = "(Optional) The name of the topic. Topic names must be made up of only uppercase and lowercase ASCII letters, numbers, underscores, and hyphens, and must be between 1 and 256 characters long. For a FIFO (first-in-first-out) topic, the name must end with the `.fifo` suffix. If omitted, Terraform will assign a random, unique name. Conflicts with `name_prefix`"
   default     = null
+}
+
+variable "key_deletion_window" {
+  type        = number
+  description = "The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30."
+  default     = 10
 }
 
 variable "name_prefix" {
@@ -146,19 +152,9 @@ variable "tags" {
   default     = {}
 }
 
-/*
-sns topic policy
-*/
-
-variable "sns_topic_policy" {
-  type        = string
-  description = "(Required) The fully-formed AWS policy as JSON."
-  default     = null
-}
-
-/*
-sns topic subscription
-*/
+#########################
+## sns topic subscription
+#########################
 
 variable "subscription_endpoint" {
   type        = string
@@ -212,4 +208,19 @@ variable "redrive_policy" {
   type        = string
   description = "(Optional) JSON String with the redrive policy that will be used in the subscription."
   default     = null
+}
+
+######################
+### Encryption
+######################
+variable "use_default_kms_key" {
+  type        = bool
+  description = "Choose whether to use default kms key for sns"
+  default     = false
+}
+
+variable "create_kms_key" {
+  type        = bool
+  description = "Choose whether to create kms key for sns"
+  default     = false
 }
