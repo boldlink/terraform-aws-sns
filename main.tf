@@ -5,7 +5,7 @@ resource "aws_kms_key" "sns" {
   count                   = var.create_kms_key ? 1 : 0
   description             = "KMS Key for SNStopics"
   policy                  = element(concat(data.aws_iam_policy_document.main.*.json, [""]), 0)
-  deletion_window_in_days = 10
+  deletion_window_in_days = var.key_deletion_window
 }
 
 ##################
