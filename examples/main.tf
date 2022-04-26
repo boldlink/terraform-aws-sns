@@ -1,9 +1,10 @@
 locals {
-  name = "test-sns-topic-${uuid()}.fifo"
+  name = "test-sns-topic.fifo"
 }
 
+## Note: This example picks the latest version of the source module
 module "aws_sns_topic" {
-  source                      = "./.."
+  source                      = "boldlink/sns/aws"
   name                        = local.name
   create_kms_key              = true
   fifo_topic                  = true
