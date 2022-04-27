@@ -27,26 +27,36 @@ output "tags_all" {
 #########################
 
 output "subscription_arn" {
-  value       = aws_sns_topic_subscription.main.*.arn
+  value = [
+    for subscription in aws_sns_topic_subscription.main : subscription.arn
+  ]
   description = "ARN of the subscription."
 }
 
 output "subscription_confirmation_was_authenticated" {
-  value       = aws_sns_topic_subscription.main.*.confirmation_was_authenticated
+  value = [
+    for subscription in aws_sns_topic_subscription.main : subscription.confirmation_was_authenticated
+  ]
   description = "Whether the subscription confirmation request was authenticated."
 }
 
 output "subscription_id" {
-  value       = aws_sns_topic_subscription.main.*.id
+  value = [
+    for subscription in aws_sns_topic_subscription.main : subscription.id
+  ]
   description = "ARN of the subscription."
 }
 
 output "subscription_owner_id" {
-  value       = aws_sns_topic_subscription.main.*.owner_id
+  value = [
+    for subscription in aws_sns_topic_subscription.main : subscription.owner_id
+  ]
   description = "AWS account ID of the subscription's owner."
 }
 
 output "subscription_pending_confirmation" {
-  value       = aws_sns_topic_subscription.main.*.pending_confirmation
+  value = [
+    for subscription in aws_sns_topic_subscription.main : subscription.pending_confirmation
+  ]
   description = "Whether the subscription has not been confirmed."
 }

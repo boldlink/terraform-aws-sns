@@ -156,58 +156,10 @@ variable "tags" {
 ## sns topic subscription
 #########################
 
-variable "subscription_endpoint" {
-  type        = string
-  description = "(Required) Endpoint to send data to. The contents vary with the protocol."
-  default     = null
-}
-
-variable "protocol" {
-  type        = string
-  description = "(Required) Protocol to use. Valid values are: `sqs`, `sms`, `lambda`, `firehose`, and `application`. Protocols `email`, `email-json`, `http` and `https` are also valid but partially supported."
-  default     = "application"
-}
-
-variable "subscription_role_arn" {
-  type        = string
-  description = "(Required if protocol is `firehose`) ARN of the IAM role to publish to Kinesis Data Firehose delivery stream."
-  default     = ""
-}
-
-variable "confirmation_timeout_in_minutes" {
-  type        = number
-  description = "(Optional) Integer indicating number of minutes to wait in retrying mode for fetching subscription arn before marking it as failure. Only applicable for http and https protocols. Default is `1`."
-  default     = 1
-}
-
-variable "subscription_delivery_policy" {
-  type        = string
-  description = "(Optional) JSON String with the delivery policy (retries, backoff, etc.) that will be used in the subscription - this only applies to HTTP/S subscriptions."
-  default     = null
-}
-
-variable "endpoint_auto_confirms" {
-  type        = bool
-  description = "(Optional) Whether the endpoint is capable of [auto confirming subscription](http://docs.aws.amazon.com/sns/latest/dg/SendMessageToHttp.html#SendMessageToHttp.prepare) (e.g., PagerDuty). Default is `false`."
-  default     = false
-}
-
-variable "filter_policy" {
-  type        = string
-  description = "(Optional) JSON String with the filter policy that will be used in the subscription to filter messages seen by the target resource."
-  default     = null
-}
-
-variable "raw_message_delivery" {
-  type        = bool
-  description = "(Optional) Whether to enable raw message delivery (the original message is directly passed, not wrapped in JSON with the original message in the message property). Default is `false`."
-  default     = false
-}
-
-variable "redrive_policy" {
-  type        = string
-  description = "(Optional) JSON String with the redrive policy that will be used in the subscription."
-  default     = null
+variable "sns_topic_subscriptions" {
+  type        = any
+  description = "Resource block for sns topic subscriptions"
+  default     = {}
 }
 
 ######################
