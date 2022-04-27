@@ -176,3 +176,18 @@ variable "create_kms_key" {
   description = "Choose whether to create kms key for sns"
   default     = false
 }
+
+######################
+### Encryption
+######################
+variable "use_default_kms_key" {
+  type        = bool
+  description = "Choose whether to use default kms key for sns"
+  default     = false
+}
+
+variable "create_kms_key" {
+  type        = bool
+  description = "Choose whether to create kms key for sns"
+  default     = false
+}
