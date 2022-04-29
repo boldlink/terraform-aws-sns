@@ -168,7 +168,7 @@ variable "sns_topic_subscriptions" {
 variable "use_default_kms_key" {
   type        = bool
   description = "Choose whether to use default kms key for sns"
-  default     = false
+  default     = true
 }
 
 variable "create_kms_key" {

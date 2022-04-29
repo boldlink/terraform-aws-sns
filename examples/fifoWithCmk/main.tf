@@ -1,6 +1,5 @@
 module "aws_sns_topic_fifo" {
   # source                      = "boldlink/sns/aws"
-  source = "./../../"
   name                        = "basic-sns-topic-kms.fifo"
   create_kms_key              = true
   fifo_topic                  = true
