@@ -11,7 +11,7 @@ variable "name" {
 variable "key_deletion_window" {
   type        = number
   description = "The waiting period, specified in number of days. After the waiting period ends, AWS KMS deletes the KMS key. If you specify a value, it must be between 7 and 30, inclusive. If you do not specify a value, it defaults to 30."
-  default     = 10
+  default     = 7
 }
 
 variable "name_prefix" {
