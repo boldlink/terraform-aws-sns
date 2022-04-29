@@ -1,5 +1,5 @@
 locals {
-  name = "test-sns-topic.fifo"
+  name = "basic-sns-topic.fifo"
 }
 
 ## Note: This example picks the latest version of the source module

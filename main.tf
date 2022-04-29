@@ -1,11 +1,18 @@
 ##################
 ## KMS Key
 ##################
+
 resource "aws_kms_key" "sns" {
   count                   = var.create_kms_key ? 1 : 0
-  description             = "KMS Key for SNStopics"
-  policy                  = element(concat(data.aws_iam_policy_document.main.*.json, [""]), 0)
+  description             = "KMS Key for SNStopic ${var.name}"
+  policy                  = data.aws_iam_policy_document.kms.json
   deletion_window_in_days = var.key_deletion_window
+}
+
+resource "aws_kms_alias" "sns" {
+  count         = var.create_kms_key ? 1 : 0
+  name          = "alias/sns/${trim(var.name, ".fifo")}"
+  target_key_id = aws_kms_key.sns[0].key_id
 }
 
 ##################
