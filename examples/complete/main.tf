@@ -10,7 +10,7 @@ resource "aws_sqs_queue" "main" {
 }
 
 ## Note: This example picks the latest version of the source module
-module "aws_sns_topic_complete" {
+module "complete_sns_topic" {
   source                      = "boldlink/sns/aws"
   name                        = "complete-sns-example"
   create_kms_key              = true

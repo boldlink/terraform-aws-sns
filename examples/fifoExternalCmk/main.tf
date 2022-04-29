@@ -5,7 +5,7 @@ data "aws_kms_alias" "aws_default" {
 }
 
 ## Note: This example picks the latest version of the source module
-module "aws_sns_topic" {
+module "fifo_sns_topic" {
   source                      = "boldlink/sns/aws"
   name                        = "fifo-external-cmk.fifo"
   kms_master_key_id           = data.aws_kms_alias.aws_default.target_key_id
