@@ -1,3 +1,6 @@
+
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+
 # AWS SNS Terraform module
 
 ## Description
