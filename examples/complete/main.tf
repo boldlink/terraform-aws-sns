@@ -11,27 +11,29 @@ resource "aws_sqs_queue" "main" {
 
 ## Note: This example picks the latest version of the source module
 module "complete_sns_topic" {
-  source                      = "boldlink/sns/aws"
-  name                        = "complete-sns-example"
-  create_kms_key              = true
-  delivery_policy             = jsonencode({
-      "http": {
-        "defaultHealthyRetryPolicy": {
-          "minDelayTarget": 20,
-          "maxDelayTarget": 20,
-          "numRetries": 3,
-          "numMaxDelayRetries": 0,
-          "numNoDelayRetries": 0,
-          "numMinDelayRetries": 0,
-          "backoffFunction": "linear"
-        },
-        "disableSubscriptionOverrides": false,
-        "defaultThrottlePolicy": {
-          "maxReceivesPerSecond": 1
+  source         = "../../"
+  name           = "complete-sns-example"
+  create_kms_key = true
+  delivery_policy = jsonencode(
+    {
+      http = {
+        defaultHealthyRetryPolicy = {
+          backoffFunction    = "linear"
+          maxDelayTarget     = 20
+          minDelayTarget     = 20
+          numMaxDelayRetries = 0
+          numMinDelayRetries = 0
+          numNoDelayRetries  = 0
+          numRetries         = 3
         }
+        defaultThrottlePolicy = {
+          maxReceivesPerSecond = 1
+        }
+        disableSubscriptionOverrides = false
       }
     }
   )
+
   ### subscription
   sns_topic_subscriptions = {
     sqs = {
