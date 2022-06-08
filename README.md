@@ -67,6 +67,7 @@ No modules.
 | <a name="input_create_kms_key"></a> [create\_kms\_key](#input\_create\_kms\_key) | Choose whether to create kms key for sns | `bool` | `false` | no |
 | <a name="input_delivery_policy"></a> [delivery\_policy](#input\_delivery\_policy) | (Optional) The SNS delivery policy. | `string` | `null` | no |
 | <a name="input_display_name"></a> [display\_name](#input\_display\_name) | (Optional) The display name for the topic | `string` | `null` | no |
+| <a name="input_enable_key_rotation"></a> [enable\_key\_rotation](#input\_enable\_key\_rotation) | Choose whether to enable key rotation | `bool` | `true` | no |
 | <a name="input_fifo_topic"></a> [fifo\_topic](#input\_fifo\_topic) | (Optional) Boolean indicating whether or not to create a FIFO (first-in-first-out) topic (default is `false`). | `bool` | `false` | no |
 | <a name="input_firehose_failure_feedback_role_arn"></a> [firehose\_failure\_feedback\_role\_arn](#input\_firehose\_failure\_feedback\_role\_arn) | (Optional) IAM role for failure feedback | `string` | `null` | no |
 | <a name="input_firehose_success_feedback_role_arn"></a> [firehose\_success\_feedback\_role\_arn](#input\_firehose\_success\_feedback\_role\_arn) | (Optional) The IAM role permitted to receive success feedback for this topic | `string` | `null` | no |

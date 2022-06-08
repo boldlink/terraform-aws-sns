@@ -176,3 +176,10 @@ variable "create_kms_key" {
   description = "Choose whether to create kms key for sns"
   default     = false
 }
+
+
+variable "enable_key_rotation" {
+  type        = bool
+  description = "Choose whether to enable key rotation"
+  default     = true
+}

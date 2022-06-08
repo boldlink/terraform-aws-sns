@@ -7,6 +7,7 @@ resource "aws_kms_key" "sns" {
   description             = "KMS Key for SNStopic ${var.name}"
   policy                  = data.aws_iam_policy_document.kms.json
   deletion_window_in_days = var.key_deletion_window
+  enable_key_rotation     = var.enable_key_rotation
 }
 
 resource "aws_kms_alias" "sns" {

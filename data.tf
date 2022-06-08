@@ -20,12 +20,7 @@ data "aws_iam_policy_document" "kms" {
     principals {
       type = "Service"
 
-      identifiers = [
-        format(
-          "logs.%s.amazonaws.com",
-          data.aws_region.current.name
-        )
-      ]
+      identifiers = ["logs.${local.region}.amazonaws.com"]
     }
 
     resources = ["*"]
@@ -43,13 +38,7 @@ data "aws_iam_policy_document" "kms" {
     principals {
       type = "AWS"
 
-      identifiers = [
-        format(
-          "arn:%s:iam::%s:root",
-          data.aws_partition.current.partition,
-          data.aws_caller_identity.current.account_id
-        )
-      ]
+      identifiers = ["arn:${local.partition}:iam::${local.account_id}:root"]
     }
 
     resources = ["*"]
