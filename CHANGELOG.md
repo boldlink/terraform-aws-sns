@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 - Feature: Expand the complete example
+- Add an example that creates within the module a kms key (most likely with an external example)
+- Add subscription examples on the complete for multiple endpoints, this will be also on the complete
 
 ## [1.1.0] - 2022-06-08
 ### Changes
