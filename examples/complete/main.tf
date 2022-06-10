@@ -1,10 +1,13 @@
-##################################################################################
-### Supporting resources
-### NOTE: Run this example in SQS Server-side encryption supported regions like
-### US East (N. Virginia), US East (Ohio), and US West (Oregon) regions
-##################################################################################
+## For test and example purpose we are using the AWS default kms key for SNS (module default)
+## Provide your CMK KMS by specifying `kms_master_key_id = <YOUR_KMS_ID_HERE>`
+## Alternatively, create a CMK KMS using this module by specifying `create_kms_key = true` as used in this example
+
 data "aws_kms_alias" "aws_default" {
   name = "alias/aws/sqs"
+}
+
+locals {
+  name = "complete-sns-example"
 }
 
 resource "aws_sqs_queue" "main" {
@@ -19,7 +22,7 @@ resource "aws_sqs_queue" "main" {
 ## Note: This example picks the latest version of the source module
 module "complete_sns_topic" {
   source         = "../../"
-  name           = "complete-sns-example"
+  name           = local.name
   create_kms_key = true
   delivery_policy = jsonencode(
     {
@@ -40,6 +43,11 @@ module "complete_sns_topic" {
       }
     }
   )
+
+  tags = {
+    Name        = local.name
+    Environment = "Dev"
+  }
 
   ### subscription
   sns_topic_subscriptions = {

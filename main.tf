@@ -32,7 +32,7 @@ resource "aws_sns_topic" "main" {
   http_success_feedback_role_arn           = var.http_success_feedback_role_arn
   http_success_feedback_sample_rate        = var.http_success_feedback_sample_rate
   http_failure_feedback_role_arn           = var.http_failure_feedback_role_arn
-  kms_master_key_id                        = var.create_kms_key == false && var.use_default_kms_key ? "alias/aws/sns" : (var.create_kms_key && var.use_default_kms_key == false ? aws_kms_key.sns[0].arn : var.kms_master_key_id)
+  kms_master_key_id                        = var.create_kms_key && var.kms_master_key_id == null ? aws_kms_key.sns[0].key_id : (var.create_kms_key == false && var.kms_master_key_id != null ? var.kms_master_key_id : data.aws_kms_alias.aws_default.target_key_id)
   fifo_topic                               = var.fifo_topic
   content_based_deduplication              = var.content_based_deduplication
   lambda_success_feedback_role_arn         = var.lambda_success_feedback_role_arn

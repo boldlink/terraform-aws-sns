@@ -2,6 +2,10 @@ data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 data "aws_region" "current" {}
 
+data "aws_kms_alias" "aws_default" {
+  name = "alias/aws/sns"
+}
+
 data "aws_iam_policy_document" "kms" {
 
   statement {
@@ -20,7 +24,7 @@ data "aws_iam_policy_document" "kms" {
     principals {
       type = "Service"
 
-      identifiers = ["logs.${local.region}.amazonaws.com"]
+      identifiers = ["logs.${local.region}.${local.dns_suffix}"]
     }
 
     resources = ["*"]

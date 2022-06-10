@@ -1,14 +1,15 @@
-# For test and example purpose we are using the AWS default kms key for SNS
-# Replace the name with your kms key alias
-data "aws_kms_alias" "aws_default" {
-  name = "alias/aws/sns"
+## For test and example purpose we are using the AWS default kms key for SNS (module default)
+## Provide your CMK KMS by specifying `kms_master_key_id = <YOUR_KMS_ID_HERE>`
+## Alternatively, create a CMK KMS using this module by specifying `create_kms_key = true`
+
+locals {
+  name = "fifo-external-cmk.fifo"
 }
 
 ## Note: This example picks the latest version of the source module
 module "fifo_sns_topic" {
   source                      = "../../"
-  name                        = "fifo-external-cmk.fifo"
-  kms_master_key_id           = data.aws_kms_alias.aws_default.target_key_id
+  name                        = local.name
   fifo_topic                  = true
   content_based_deduplication = true
 
@@ -31,4 +32,9 @@ module "fifo_sns_topic" {
       }
     }
   )
+
+  tags = {
+    Name        = local.name
+    Environment = "Dev"
+  }
 }

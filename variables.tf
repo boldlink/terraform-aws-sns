@@ -165,18 +165,11 @@ variable "sns_topic_subscriptions" {
 ######################
 ### Encryption
 ######################
-variable "use_default_kms_key" {
-  type        = bool
-  description = "Choose whether to use default kms key for sns"
-  default     = true
-}
-
 variable "create_kms_key" {
   type        = bool
   description = "Choose whether to create kms key for sns"
   default     = false
 }
-
 
 variable "enable_key_rotation" {
   type        = bool
