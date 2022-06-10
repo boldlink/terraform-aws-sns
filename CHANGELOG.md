@@ -39,4 +39,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial commit
 - sns module with an example
 
+[Unreleased]: https://github.com/boldlink/terraform-aws-sns/compare/1.1.0...HEAD
+
 [1.0.0]: https://github.com/boldlink/terraform-aws-sns/releases/tag/1.0.0
