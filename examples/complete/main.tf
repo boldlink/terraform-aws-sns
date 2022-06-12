@@ -21,8 +21,8 @@ resource "aws_sqs_queue" "main" {
 
 ## Note: This example picks the latest version of the source module
 module "complete_sns_topic" {
-  source = "../../"
-  name   = local.name
+  source         = "../../"
+  name           = local.name
   create_kms_key = true
   delivery_policy = jsonencode(
     {
