@@ -23,7 +23,7 @@ resource "aws_sqs_queue" "main" {
 module "complete_sns_topic" {
   source = "../../"
   name   = local.name
-  #create_kms_key = true
+  create_kms_key = true
   delivery_policy = jsonencode(
     {
       http = {
