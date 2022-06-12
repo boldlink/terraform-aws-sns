@@ -74,9 +74,9 @@ variable "http_failure_feedback_role_arn" {
   default     = null
 }
 
-variable "kms_master_key_id" {
+variable "kms_master_key_arn" {
   type        = string
-  description = "(Optional) The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK."
+  description = "(Optional) The ARN of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK."
   default     = null
 }
 

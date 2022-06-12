@@ -8,6 +8,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Feature: Expand the complete example
 - Add an example that uses an external CMK KMS
 - Add subscription examples on the complete for multiple endpoints, this will be also on the complete
+- Fix: checkov alert CKV_AWS_111 "Ensure IAM policies does not allow write access without constraints"
+- Fix: checkov alert CKV_AWS_109 "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
 
 ## [1.1.0] - 2022-06-10
 ### Changes

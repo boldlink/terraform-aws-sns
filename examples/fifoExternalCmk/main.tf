@@ -1,5 +1,5 @@
 ## For test and example purpose we are using the AWS default kms key for SNS (module default)
-## Provide your CMK KMS by specifying `kms_master_key_id = <YOUR_KMS_ID_HERE>`
+## Provide your CMK KMS by specifying `kms_master_key_arn = <YOUR_KMS_ARN_HERE>`
 ## Alternatively, create a CMK KMS using this module by specifying `create_kms_key = true`
 
 locals {
