@@ -74,9 +74,9 @@ variable "http_failure_feedback_role_arn" {
   default     = null
 }
 
-variable "kms_master_key_id" {
+variable "kms_master_key_arn" {
   type        = string
-  description = "(Optional) The ID of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK."
+  description = "(Optional) The ARN of an AWS-managed customer master key (CMK) for Amazon SNS or a custom CMK."
   default     = null
 }
 
@@ -165,14 +165,14 @@ variable "sns_topic_subscriptions" {
 ######################
 ### Encryption
 ######################
-variable "use_default_kms_key" {
-  type        = bool
-  description = "Choose whether to use default kms key for sns"
-  default     = true
-}
-
 variable "create_kms_key" {
   type        = bool
   description = "Choose whether to create kms key for sns"
   default     = false
+}
+
+variable "enable_key_rotation" {
+  type        = bool
+  description = "Choose whether to enable key rotation"
+  default     = true
 }
