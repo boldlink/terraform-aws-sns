@@ -28,11 +28,6 @@ data "aws_iam_policy_document" "kms" {
     }
 
     resources = ["*"]
-    condition {
-      test     = "StringEquals"
-      variable = "kms:CallerAccount"
-      values   = [local.account_id]
-    }
   }
 
   statement {
@@ -51,10 +46,5 @@ data "aws_iam_policy_document" "kms" {
     }
 
     resources = ["*"]
-    condition {
-      test     = "StringEquals"
-      variable = "kms:CallerAccount"
-      values   = [local.account_id]
-    }
   }
 }
