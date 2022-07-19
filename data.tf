@@ -1,11 +1,15 @@
+######################
+## data sources
+######################
 data "aws_caller_identity" "current" {}
 data "aws_partition" "current" {}
 data "aws_region" "current" {}
 
+
 data "aws_iam_policy_document" "kms" {
 
   statement {
-    sid = "AllowKMSPermissions"
+    sid = "Allow KMS Permissions"
 
     actions = [
       "kms:Encrypt*",
@@ -24,10 +28,15 @@ data "aws_iam_policy_document" "kms" {
     }
 
     resources = ["*"]
+    condition {
+      test     = "StringEquals"
+      variable = "kms:CallerAccount"
+      values   = [local.account_id]
+    }
   }
 
   statement {
-    sid = "EnableIAMUserPermissions"
+    sid = "Enable IAM User Permissions"
 
     actions = [
       "kms:*",
@@ -42,5 +51,10 @@ data "aws_iam_policy_document" "kms" {
     }
 
     resources = ["*"]
+    condition {
+      test     = "StringEquals"
+      variable = "kms:CallerAccount"
+      values   = [local.account_id]
+    }
   }
 }
