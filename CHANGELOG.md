@@ -11,8 +11,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.1] - 2022-07-19
 ### Changes
-- Add a note to module README about the skipped checkov flags CKV_AWS_111 and CKV_AWS_109 (because KMS Key policy has slightly structural and functional difference from IAM policy)
-- Added `.checkov.yml`
+- fix: checkov alert CKV_AWS_111 "Ensure IAM policies does not allow write access without constraints"
+- fix: checkov alert CKV_AWS_109 "Ensure IAM policies does not allow permissions management / resource exposure without constraints"
 
 ## [1.1.0] - 2022-06-14
 ### Changes

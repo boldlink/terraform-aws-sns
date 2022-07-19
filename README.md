@@ -27,8 +27,6 @@ module "minimum_sns_topic" {
   }
 }
 ```
-### Security Note
-- Checkov checks `CKV_AWS_111` and `CKV_AWS_109` are skipped in this module because `Resource` element is required for KMS key policy with the only possible value being `"*"`. [See AWS Documentation](https://docs.aws.amazon.com/kms/latest/developerguide/key-policy-overview.html)
 
 ## Documentation
 
