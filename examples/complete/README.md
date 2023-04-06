@@ -1,4 +1,11 @@
-[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/pre-commit.yml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+[![License](https://img.shields.io/badge/License-Apache-blue.svg)](https://github.com/boldlink/terraform-aws-sns/blob/main/LICENSE)
+[![Latest Release](https://img.shields.io/github/release/boldlink/terraform-aws-sns.svg)](https://github.com/boldlink/terraform-aws-sns/releases/latest)
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/update.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/release.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/pre-commit.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/pr-labeler.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/checkov.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
+[![Build Status](https://github.com/boldlink/terraform-aws-sns/actions/workflows/auto-badge.yaml/badge.svg)](https://github.com/boldlink/terraform-aws-sns/actions)
 
 [<img src="https://avatars.githubusercontent.com/u/25388280?s=200&v=4" width="96"/>](https://boldlink.io)
 
@@ -16,7 +23,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.22.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 4.61.0 |
 
 ## Modules
 
