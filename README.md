@@ -54,7 +54,7 @@ module "minimum_sns_topic" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.6.2 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.8.0 |
 
 ## Modules
 
