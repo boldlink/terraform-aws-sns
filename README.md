@@ -36,7 +36,8 @@ locals {
 }
 
 module "minimum_sns_topic" {
-  source = "../../"
+  source  = "boldlink/sns/aws"
+  version = "<add_latest_version_here>"
   name   = local.name
 
   tags = {
@@ -152,4 +153,4 @@ The makefile contained in this repo is optimized for linux paths and the main pu
 * Clean all tests:
 `$ make clean`
 
-#### BOLDLink-SIG 2022
+#### BOLDLink-SIG 2023
