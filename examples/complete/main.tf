@@ -46,6 +46,7 @@ module "complete_sns_topic" {
   source                                   = "../../"
   name                                     = var.name
   create_kms_key                           = true
+  create_sns_topic_policy                  = true
   policy                                   = data.aws_iam_policy_document.sns_topic_policy.json
   application_success_feedback_role_arn    = module.application_feedback_role.arn
   application_success_feedback_sample_rate = "50"
@@ -92,6 +93,13 @@ module "complete_sns_topic" {
         deadLetterTargetArn = aws_sqs_queue.example_dead_letter_queue.arn,
       })
     }
-
+    email = {
+      endpoint = "example-email@email.local"
+      protocol = "email"
+    }
+    https = {
+      endpoint = "https://example.com/"
+      protocol = "https"
+    }
   }
 }
