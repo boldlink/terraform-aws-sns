@@ -46,7 +46,7 @@ resource "aws_sns_topic" "main" {
 }
 
 resource "aws_sns_topic_policy" "main" {
-  count = var.create_sns_topic_policy ? 1 : 0
+  count  = var.create_sns_topic_policy ? 1 : 0
   arn    = aws_sns_topic.main.arn
   policy = var.policy
 }
