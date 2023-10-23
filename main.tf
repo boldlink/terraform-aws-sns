@@ -23,7 +23,6 @@ resource "aws_sns_topic" "main" {
   name                                     = var.name
   name_prefix                              = var.name != null ? null : var.name_prefix
   display_name                             = var.display_name
-  policy                                   = var.policy
   delivery_policy                          = var.delivery_policy
   application_success_feedback_role_arn    = var.application_success_feedback_role_arn
   application_success_feedback_sample_rate = var.application_success_feedback_sample_rate
@@ -44,6 +43,12 @@ resource "aws_sns_topic" "main" {
   firehose_success_feedback_sample_rate    = var.firehose_success_feedback_sample_rate
   firehose_failure_feedback_role_arn       = var.firehose_failure_feedback_role_arn
   tags                                     = var.tags
+}
+
+resource "aws_sns_topic_policy" "default" {
+  count  = var.policy != null ? 1 : 0
+  arn    = aws_sns_topic.main.arn
+  policy = var.policy
 }
 
 #########################
