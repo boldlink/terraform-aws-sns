@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - showcase subscription_role_arn to publish to Kinesis Data Firehose delivery stream.
 - Add subscription examples on the complete for other protocols (lambda, HTTP, platform application endpoint, SMS, kinesis data firehorse ).
 
-## [1.2.0] - 2023-10-23
+## [1.1.2] - 2023-10-23
 ### Changes
 - feat: sns topic policy
 - added example sqs queue to used as dead letter queue arn
@@ -48,9 +48,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Initial commit
 - sns module with an example
 
-[Unreleased]: https://github.com/boldlink/terraform-aws-sns/compare/1.2.0...HEAD
+[Unreleased]: https://github.com/boldlink/terraform-aws-sns/compare/1.1.2...HEAD
 
-[1.2.0]: https://github.com/boldlink/terraform-aws-sns/releases/tag/1.2.0
+[1.1.2]: https://github.com/boldlink/terraform-aws-sns/releases/tag/1.1.2
 [1.1.1]: https://github.com/boldlink/terraform-aws-sns/releases/tag/1.1.1
 [1.1.0]: https://github.com/boldlink/terraform-aws-sns/releases/tag/1.1.0
 [1.0.2]: https://github.com/boldlink/terraform-aws-sns/releases/tag/1.0.2
