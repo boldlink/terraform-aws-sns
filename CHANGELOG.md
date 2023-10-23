@@ -11,7 +11,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.1.2] - 2023-10-23
 ### Changes
-- feat: sns topic policy
+- fix: sns topic policy
 - added example sqs queue to used as dead letter queue arn
 - added example filter policy for sns topic subscription
 - added example roles to showcase success feedback arns
