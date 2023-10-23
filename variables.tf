@@ -26,6 +26,12 @@ variable "display_name" {
   default     = null
 }
 
+variable "create_sns_topic_policy" {
+  description = "Whether to create sns topic policy or not"
+  type = bool
+  default = false  
+}
+
 variable "policy" {
   type        = string
   description = "(Optional) The fully-formed AWS policy as JSON."
