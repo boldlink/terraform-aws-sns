@@ -25,7 +25,7 @@ This terraform module creates sns topic and associated resources.
 
 - Consistency and Reusability: When using this module, you can define your SNS topics and associated resources in a consistent and repeatable manner across your infrastructure. This promotes reusability, as you can use the same module in multiple projects and environments without duplicating configuration code. It simplifies your codebase and helps maintain a consistent setup for SNS topics.
 
-Examples available [here](https://github.com/boldlink/terraform-aws-sns/tree/main/examples)
+Examples available [here](./examples)
 
 ## Usage
 *NOTE*: These examples use the latest version of this module

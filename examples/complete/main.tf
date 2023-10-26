@@ -16,7 +16,6 @@ resource "aws_sqs_queue" "example_dead_letter_queue" {
 }
 
 module "http_feedback_role" {
-  #checkov:skip=CKV_TF_1: "Ensure Terraform module sources use a commit hash"
   source             = "boldlink/iam-role/aws"
   version            = "1.1.1"
   name               = "${var.name}-http-feedback-role"
@@ -29,7 +28,6 @@ module "http_feedback_role" {
 }
 
 module "application_feedback_role" {
-  #checkov:skip=CKV_TF_1: "Ensure Terraform module sources use a commit hash"
   source             = "boldlink/iam-role/aws"
   version            = "1.1.1"
   name               = "${var.name}-application-feedback-role"
