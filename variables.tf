@@ -26,6 +26,12 @@ variable "display_name" {
   default     = null
 }
 
+variable "create_sns_topic_policy" {
+  description = "Whether to create sns topic policy or not"
+  type        = bool
+  default     = false
+}
+
 variable "policy" {
   type        = string
   description = "(Optional) The fully-formed AWS policy as JSON."
@@ -87,9 +93,9 @@ variable "fifo_topic" {
 }
 
 variable "content_based_deduplication" {
-  type        = string
+  type        = bool
   description = "(Optional) Enables content-based deduplication for FIFO topics."
-  default     = null
+  default     = false
 }
 
 variable "lambda_success_feedback_role_arn" {

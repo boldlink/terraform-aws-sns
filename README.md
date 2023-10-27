@@ -16,7 +16,16 @@
 ## Description
 This terraform module creates sns topic and associated resources.
 
-Examples available [here](https://github.com/boldlink/terraform-aws-sns/tree/main/examples)
+## Why use this module over standard resources
+- Advanced Logging Configuration: This module provides the ability to configure logging policies for different protocols. In the AWS SNS console, editing mixed-protocol policies is not supported. With this module, you can easily define logging policies to suit your specific use cases, ensuring that you capture the right information for auditing and troubleshooting.
+
+- Security Best Practices: Security is a top priority when working with AWS resources. This module adheres to security best practices by integrating automated scanning with Checkov. Checkov is a powerful security scanner that can help you identify and mitigate security vulnerabilities and compliance issues in your infrastructure code. By using this module, you can ensure that your SNS topics are set up securely and compliant with AWS security standards.
+
+- Ease of Use: Terraform modules are designed to simplify infrastructure provisioning and management. This module encapsulates the complexity of creating and configuring SNS topics, making it easier to integrate SNS into your infrastructure. It abstracts the low-level details and provides a clean, declarative way to define your SNS resources, reducing the risk of misconfigurations and streamlining the deployment process.
+
+- Consistency and Reusability: When using this module, you can define your SNS topics and associated resources in a consistent and repeatable manner across your infrastructure. This promotes reusability, as you can use the same module in multiple projects and environments without duplicating configuration code. It simplifies your codebase and helps maintain a consistent setup for SNS topics.
+
+Examples available [here](./examples)
 
 ## Usage
 *NOTE*: These examples use the latest version of this module
@@ -27,7 +36,8 @@ locals {
 }
 
 module "minimum_sns_topic" {
-  source = "../../"
+  source  = "boldlink/sns/aws"
+  version = "<add_latest_version_here>"
   name   = local.name
 
   tags = {
@@ -55,7 +65,7 @@ module "minimum_sns_topic" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.12.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.23.0 |
 
 ## Modules
 
@@ -68,6 +78,7 @@ No modules.
 | [aws_kms_alias.sns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_alias) | resource |
 | [aws_kms_key.sns](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/kms_key) | resource |
 | [aws_sns_topic.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic) | resource |
+| [aws_sns_topic_policy.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_policy) | resource |
 | [aws_sns_topic_subscription.main](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic_subscription) | resource |
 | [aws_caller_identity.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/caller_identity) | data source |
 | [aws_partition.current](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/partition) | data source |
@@ -80,8 +91,9 @@ No modules.
 | <a name="input_application_failure_feedback_role_arn"></a> [application\_failure\_feedback\_role\_arn](#input\_application\_failure\_feedback\_role\_arn) | (Optional) IAM role for failure feedback | `string` | `null` | no |
 | <a name="input_application_success_feedback_role_arn"></a> [application\_success\_feedback\_role\_arn](#input\_application\_success\_feedback\_role\_arn) | (Optional) The IAM role permitted to receive success feedback for this topic | `string` | `null` | no |
 | <a name="input_application_success_feedback_sample_rate"></a> [application\_success\_feedback\_sample\_rate](#input\_application\_success\_feedback\_sample\_rate) | (Optional) Percentage of success to sample | `string` | `null` | no |
-| <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | (Optional) Enables content-based deduplication for FIFO topics. | `string` | `null` | no |
+| <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | (Optional) Enables content-based deduplication for FIFO topics. | `bool` | `false` | no |
 | <a name="input_create_kms_key"></a> [create\_kms\_key](#input\_create\_kms\_key) | Choose whether to create kms key for sns | `bool` | `false` | no |
+| <a name="input_create_sns_topic_policy"></a> [create\_sns\_topic\_policy](#input\_create\_sns\_topic\_policy) | Whether to create sns topic policy or not | `bool` | `false` | no |
 | <a name="input_delivery_policy"></a> [delivery\_policy](#input\_delivery\_policy) | (Optional) The SNS delivery policy. | `string` | `null` | no |
 | <a name="input_display_name"></a> [display\_name](#input\_display\_name) | (Optional) The display name for the topic | `string` | `null` | no |
 | <a name="input_enable_key_rotation"></a> [enable\_key\_rotation](#input\_enable\_key\_rotation) | Choose whether to enable key rotation | `bool` | `true` | no |
@@ -141,4 +153,4 @@ The makefile contained in this repo is optimized for linux paths and the main pu
 * Clean all tests:
 `$ make clean`
 
-#### BOLDLink-SIG 2022
+#### BOLDLink-SIG 2023
