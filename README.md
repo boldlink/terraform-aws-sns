@@ -65,7 +65,7 @@ module "minimum_sns_topic" {
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.22.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.23.0 |
 
 ## Modules
 
@@ -91,7 +91,7 @@ No modules.
 | <a name="input_application_failure_feedback_role_arn"></a> [application\_failure\_feedback\_role\_arn](#input\_application\_failure\_feedback\_role\_arn) | (Optional) IAM role for failure feedback | `string` | `null` | no |
 | <a name="input_application_success_feedback_role_arn"></a> [application\_success\_feedback\_role\_arn](#input\_application\_success\_feedback\_role\_arn) | (Optional) The IAM role permitted to receive success feedback for this topic | `string` | `null` | no |
 | <a name="input_application_success_feedback_sample_rate"></a> [application\_success\_feedback\_sample\_rate](#input\_application\_success\_feedback\_sample\_rate) | (Optional) Percentage of success to sample | `string` | `null` | no |
-| <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | (Optional) Enables content-based deduplication for FIFO topics. | `string` | `null` | no |
+| <a name="input_content_based_deduplication"></a> [content\_based\_deduplication](#input\_content\_based\_deduplication) | (Optional) Enables content-based deduplication for FIFO topics. | `bool` | `false` | no |
 | <a name="input_create_kms_key"></a> [create\_kms\_key](#input\_create\_kms\_key) | Choose whether to create kms key for sns | `bool` | `false` | no |
 | <a name="input_create_sns_topic_policy"></a> [create\_sns\_topic\_policy](#input\_create\_sns\_topic\_policy) | Whether to create sns topic policy or not | `bool` | `false` | no |
 | <a name="input_delivery_policy"></a> [delivery\_policy](#input\_delivery\_policy) | (Optional) The SNS delivery policy. | `string` | `null` | no |

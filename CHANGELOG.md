@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add an example that uses an external CMK KMS
 - showcase subscription_role_arn to publish to Kinesis Data Firehose delivery stream.
 - Add subscription examples on the complete for other protocols (lambda, HTTP, platform application endpoint, SMS, kinesis data firehorse ).
-- Showcase subscription_role_arn to to publish to Kinesis Data Firehose delivery stream 
+- Showcase subscription_role_arn to to publish to Kinesis Data Firehose delivery stream
 
 ## [1.1.2] - 2023-10-23
 ### Changes
