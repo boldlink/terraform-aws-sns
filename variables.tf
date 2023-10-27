@@ -93,9 +93,9 @@ variable "fifo_topic" {
 }
 
 variable "content_based_deduplication" {
-  type        = string
+  type        = bool
   description = "(Optional) Enables content-based deduplication for FIFO topics."
-  default     = null
+  default     = false
 }
 
 variable "lambda_success_feedback_role_arn" {

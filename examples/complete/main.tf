@@ -43,6 +43,7 @@ module "application_feedback_role" {
 module "complete_sns_topic" {
   source                                   = "../../"
   name                                     = var.name
+  display_name                             = var.name
   create_kms_key                           = true
   create_sns_topic_policy                  = true
   policy                                   = data.aws_iam_policy_document.sns_topic_policy.json
@@ -50,6 +51,16 @@ module "complete_sns_topic" {
   application_success_feedback_sample_rate = "50"
   http_success_feedback_role_arn           = module.http_feedback_role.arn
   http_success_feedback_sample_rate        = "100"
+  application_failure_feedback_role_arn    = module.application_feedback_role.arn
+  http_failure_feedback_role_arn           = module.http_feedback_role.arn
+  lambda_success_feedback_role_arn         = module.application_feedback_role.arn
+  lambda_success_feedback_sample_rate      = "0"
+  lambda_failure_feedback_role_arn         = module.application_feedback_role.arn
+  sqs_success_feedback_role_arn            = module.application_feedback_role.arn
+  sqs_failure_feedback_role_arn            = module.application_feedback_role.arn
+  firehose_success_feedback_role_arn       = module.http_feedback_role.arn
+  firehose_success_feedback_sample_rate    = "0"
+  firehose_failure_feedback_role_arn       = module.http_feedback_role.arn
   delivery_policy = jsonencode(
     {
       http = {
@@ -78,10 +89,12 @@ module "complete_sns_topic" {
   ### subscription
   sns_topic_subscriptions = {
     sqs = {
-      endpoint             = aws_sqs_queue.main.arn
-      protocol             = "sqs"
-      raw_message_delivery = true
-      filter_policy        = <<EOF
+      endpoint                        = aws_sqs_queue.main.arn
+      protocol                        = "sqs"
+      confirmation_timeout_in_minutes = 1
+      raw_message_delivery            = true
+      endpoint_auto_confirms          = false
+      filter_policy                   = <<EOF
       {
         "eventType": ["order_created", "order_updated"],
         "customer_id": [123, 456]
@@ -98,6 +111,23 @@ module "complete_sns_topic" {
     https = {
       endpoint = "https://example.com/"
       protocol = "https"
+      delivery_policy = jsonencode({
+        "healthyRetryPolicy" : {
+          "minDelayTarget" : 1,
+          "maxDelayTarget" : 60,
+          "numRetries" : 50,
+          "numNoDelayRetries" : 3,
+          "numMinDelayRetries" : 2,
+          "numMaxDelayRetries" : 35,
+          "backoffFunction" : "exponential"
+        },
+        "throttlePolicy" : {
+          "maxReceivesPerSecond" : 10
+        },
+        "requestPolicy" : {
+          "headerContentType" : "application/json"
+        }
+      })
     }
   }
 }
